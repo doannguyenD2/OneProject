@@ -11,6 +11,7 @@
 public class matHang {
     private int maHang;
     private String nhomHanString;
+    private String nhomHangString;
     private Double giaDouble;
 
     public int getMaHang() {
@@ -36,5 +37,15 @@ public class matHang {
     public void setGiaDouble(Double giaDouble) {
         this.giaDouble = giaDouble;
     }
+
+    public String getNhomHangString() {
+        return nhomHangString;
+    }
+
+    public void setNhomHangString(String nhomHangString) {
+        this.nhomHangString = nhomHangString;
+    }
+    
+    
     
 }
