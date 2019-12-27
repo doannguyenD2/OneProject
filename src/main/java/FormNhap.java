@@ -22,7 +22,9 @@ import javax.swing.table.DefaultTableModel;
 public class FormNhap extends javax.swing.JFrame {
 
     private  ArrayList<khachHang> danhSachKH = new ArrayList<>();
+    private  ArrayList<matHang> danhSachMH = new ArrayList<>();
     private int maKH=10000; 
+    private int maMH = 1000;
     
     
     public FormNhap() {
@@ -52,6 +54,17 @@ public class FormNhap extends javax.swing.JFrame {
         themKhachButton = new javax.swing.JButton();
         loiLabel = new javax.swing.JLabel();
         nhapHang = new javax.swing.JPanel();
+        maHangLabel = new javax.swing.JLabel();
+        tenHangLabel = new javax.swing.JLabel();
+        nhomHangLabel = new javax.swing.JLabel();
+        giaBanLabel = new javax.swing.JLabel();
+        themHangButton = new javax.swing.JButton();
+        tenHangTextField = new javax.swing.JTextField();
+        nhomHangCombo = new javax.swing.JComboBox<>();
+        giaBanTextField = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        hangHoaTable = new javax.swing.JTable();
+        loiHangLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,15 +167,108 @@ public class FormNhap extends javax.swing.JFrame {
 
         tabNhapKhach.addTab("Nhập khách", nhapKhach);
 
+        maHangLabel.setText("Mã hàng");
+
+        tenHangLabel.setText("Tên hàng");
+
+        nhomHangLabel.setText("Nhóm hàng");
+
+        giaBanLabel.setText("Giá bán");
+
+        themHangButton.setText("Thêm hàng");
+        themHangButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                themHangButtonActionPerformed(evt);
+            }
+        });
+
+        tenHangTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tenHangTextFieldActionPerformed(evt);
+            }
+        });
+
+        nhomHangCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hàng thời trang", "Hàng tiêu dùng", "Hàng điện máy", "Hàng gia dụng" }));
+        nhomHangCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nhomHangComboActionPerformed(evt);
+            }
+        });
+
+        hangHoaTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã Hàng", "Tên Hàng", "Nhóm Hàng", "Giá Bán"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(hangHoaTable);
+
         javax.swing.GroupLayout nhapHangLayout = new javax.swing.GroupLayout(nhapHang);
         nhapHang.setLayout(nhapHangLayout);
         nhapHangLayout.setHorizontalGroup(
             nhapHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 687, Short.MAX_VALUE)
+            .addGroup(nhapHangLayout.createSequentialGroup()
+                .addGroup(nhapHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(nhapHangLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(nhapHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(giaBanLabel)
+                            .addComponent(nhomHangLabel)
+                            .addComponent(tenHangLabel)
+                            .addComponent(maHangLabel)
+                            .addGroup(nhapHangLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(nhapHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(loiHangLabel)
+                                    .addComponent(giaBanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(nhapHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, nhapHangLayout.createSequentialGroup()
+                            .addGap(42, 42, 42)
+                            .addComponent(tenHangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(nhapHangLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(nhomHangCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(nhapHangLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(themHangButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         nhapHangLayout.setVerticalGroup(
             nhapHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+            .addGroup(nhapHangLayout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(maHangLabel)
+                .addGap(55, 55, 55)
+                .addComponent(tenHangLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tenHangTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(nhomHangLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nhomHangCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(giaBanLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(giaBanTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(loiHangLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(themHangButton)
+                .addContainerGap())
+            .addGroup(nhapHangLayout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         tabNhapKhach.addTab("Nhập hàng", nhapHang);
@@ -200,7 +306,7 @@ public class FormNhap extends javax.swing.JFrame {
             addRowKhachHang();
             
             //doc ghi file
-            File file = new File("sinhvien.txt");
+            File file = new File("KH.txt");
             if(!file.exists()) file.createNewFile();
             
             BufferedWriter bw;
@@ -229,6 +335,60 @@ public class FormNhap extends javax.swing.JFrame {
         
     }//GEN-LAST:event_themKhachButtonActionPerformed
 
+    private void themHangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themHangButtonActionPerformed
+        try {
+            matHang mHang = new matHang();
+            mHang.setMaHang(maKH);
+            if(tenHangTextField.getText().isBlank()||nhomHangCombo.getSelectedItem().toString().isBlank()||giaBanTextField.getText().isBlank())
+                throw new IllegalArgumentException();
+            mHang.setTenHangString(tenHangTextField.getText());
+            mHang.setNhomHangString(nhomHangCombo.getSelectedItem().toString());
+            mHang.setGiaDouble(Double.parseDouble(giaBanTextField.getText()));
+            danhSachMH.add(mHang);
+            maHangLabel.setText("Mã hàng " + maKH+1);
+            addRowMatHang();
+            
+            //doc ghi file
+            File file = new File("MH.txt");
+            if(!file.exists()) file.createNewFile();
+            
+            BufferedWriter bw;
+            FileWriter fw;
+            
+            fw = new FileWriter(file.getAbsoluteFile(),true);
+            bw = new BufferedWriter(fw);
+            bw.write(maMH + "\n");
+            bw.write(tenHangLabel.getText() + "\n");
+            bw.write(nhomHangCombo.getSelectedItem().toString() + "\n");
+            bw.write(giaBanLabel.getText() + "\n");
+            bw.close();
+            fw.close();
+            //ket thuc doc ghi file
+            maMH++;
+            tenHangTextField.setText("");
+            giaBanTextField.setText("");
+            
+        } catch(NumberFormatException ex)
+        {
+            // phai try catch cai cu the truoc
+            loiHangLabel.setText("Loi dinh dang gia");
+        }
+        catch (IllegalArgumentException e) {
+            loiHangLabel.setText("Vui long dien vao ki tu trong");
+        } catch (IOException ex) {
+            Logger.getLogger(FormNhap.class.getName()).log(Level.SEVERE, null, ex);
+            loiHangLabel.setText("Loi ra vao file, vui long xoa file va thu lai");
+        }
+    }//GEN-LAST:event_themHangButtonActionPerformed
+
+    private void tenHangTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenHangTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tenHangTextFieldActionPerformed
+
+    private void nhomHangComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nhomHangComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nhomHangComboActionPerformed
+
     private void addRowKhachHang(){
         DefaultTableModel dtm1 = (DefaultTableModel) khachHangTable.getModel();
        dtm1.setRowCount(0);
@@ -238,6 +398,18 @@ public class FormNhap extends javax.swing.JFrame {
                 rowKH.add(s.getHoTenString());
                 rowKH.add(s.getDiaChiString());
                 rowKH.add(s.getSoDTString());
+                dtm1.addRow(rowKH);
+       }
+    }
+        private void addRowMatHang(){
+        DefaultTableModel dtm1 = (DefaultTableModel) hangHoaTable.getModel();
+       dtm1.setRowCount(0);
+       for(matHang s:danhSachMH){
+                Vector rowKH= new Vector();
+                rowKH.add(s.getMaHang());
+                rowKH.add(s.getTenHangString());
+                rowKH.add(s.getNhomHangString());
+                rowKH.add(s.getGiaDouble());
                 dtm1.addRow(rowKH);
        }
     }
@@ -278,18 +450,29 @@ public class FormNhap extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField diaChiTextField;
+    private javax.swing.JLabel giaBanLabel;
+    private javax.swing.JTextField giaBanTextField;
+    private javax.swing.JTable hangHoaTable;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable khachHangTable;
+    private javax.swing.JLabel loiHangLabel;
     private javax.swing.JLabel loiLabel;
+    private javax.swing.JLabel maHangLabel;
     private javax.swing.JLabel maKhachHangLabel;
     private javax.swing.JPanel nhapHang;
     private javax.swing.JPanel nhapKhach;
+    private javax.swing.JComboBox<String> nhomHangCombo;
+    private javax.swing.JLabel nhomHangLabel;
     private javax.swing.JTextField soDTTextField;
     private javax.swing.JTabbedPane tabNhapKhach;
+    private javax.swing.JLabel tenHangLabel;
+    private javax.swing.JTextField tenHangTextField;
     private javax.swing.JTextField tenKHTextField;
+    private javax.swing.JButton themHangButton;
     private javax.swing.JButton themKhachButton;
     // End of variables declaration//GEN-END:variables
 }

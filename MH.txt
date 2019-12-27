@@ -1,0 +1,24 @@
+1000
+Tên hàng
+Hàng th?i trang
+Giá bán
+1000
+Tên hàng
+Hàng th?i trang
+Giá bán
+1001
+Tên hàng
+Hàng ?i?n máy
+Giá bán
+1002
+Tên hàng
+Hàng ?i?n máy
+Giá bán
+1000
+Tên hàng
+Hàng th?i trang
+Giá bán
+1000
+Tên hàng
+Hàng gia d?ng
+Giá bán

@@ -10,7 +10,7 @@
  */
 public class matHang {
     private int maHang;
-    private String nhomHanString;
+    private String tenHangString;
     private String nhomHangString;
     private Double giaDouble;
 
@@ -22,12 +22,12 @@ public class matHang {
         this.maHang = maHang;
     }
 
-    public String getNhomHanString() {
-        return nhomHanString;
+    public void setTenHangString(String tenHangString) {
+        this.tenHangString = tenHangString;
     }
 
-    public void setNhomHanString(String nhomHanString) {
-        this.nhomHanString = nhomHanString;
+    public String getTenHangString() {
+        return tenHangString;
     }
 
     public Double getGiaDouble() {
