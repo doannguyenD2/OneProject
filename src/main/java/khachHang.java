@@ -12,7 +12,7 @@ public class khachHang {
     private int maKH;
     private String hoTenString;
     private String diaChiString;
-    private String soDTString;
+    private long soDTLong;
 
     public int getMaKH() {
         return maKH;
@@ -38,12 +38,12 @@ public class khachHang {
         this.diaChiString = diaChiString;
     }
 
-    public String getSoDTString() {
-        return soDTString;
+    public long getSoDTLong() {
+        return soDTLong;
     }
 
-    public void setSoDTString(String soDTString) {
-        this.soDTString = soDTString;
+    public void setSoDTLong(long soDTLong) {
+        this.soDTLong = soDTLong;
     }
 
     

@@ -304,7 +304,7 @@ public class FormNhap extends javax.swing.JFrame {
                 throw new IllegalArgumentException();
             kH.setHoTenString(tenKHTextField.getText());
             kH.setDiaChiString(diaChiTextField.getText());
-            kH.setSoDTString(soDTTextField.getText());
+            kH.setSoDTLong(Long.parseLong(soDTTextField.getText()));
             danhSachKH.add(kH);
             maKH++;
             maKhachHangLabel.setText("Mã khách hàng " + maKH);
@@ -330,7 +330,11 @@ public class FormNhap extends javax.swing.JFrame {
             diaChiTextField.setText("");
             soDTTextField.setText("");
             
-        } catch (IllegalArgumentException e) {
+        } catch(NumberFormatException e)
+        {
+            loiLabel.setText("Sai SDT");
+        }
+        catch (IllegalArgumentException e) {
             loiLabel.setText("Vui long dien vao ki tu trong");
         } catch (IOException ex) {
             Logger.getLogger(FormNhap.class.getName()).log(Level.SEVERE, null, ex);
@@ -401,7 +405,7 @@ public class FormNhap extends javax.swing.JFrame {
                 rowKH.add(s.getMaKH());
                 rowKH.add(s.getHoTenString());
                 rowKH.add(s.getDiaChiString());
-                rowKH.add(s.getSoDTString());
+                rowKH.add(s.getSoDTLong());
                 dtm1.addRow(rowKH);
        }
     }
@@ -429,7 +433,7 @@ public class FormNhap extends javax.swing.JFrame {
                 kH.setMaKH(Integer.parseInt(sc.nextLine()));
                 kH.setHoTenString(sc.nextLine());
                 kH.setDiaChiString(sc.nextLine());
-                kH.setSoDTString(sc.nextLine());
+                kH.setSoDTLong(Long.parseLong(sc.nextLine()));
                 danhSachKH.add(kH); 
             }
                 addRowKhachHang();
