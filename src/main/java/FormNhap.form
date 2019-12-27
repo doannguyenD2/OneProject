@@ -324,7 +324,7 @@
             <Component class="javax.swing.JComboBox" name="nhomHangCombo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;H&#xe0;ng th&#x1edd;i trang&quot;, &quot;H&#xe0;ng ti&#xea;u d&#xf9;ng&quot;, &quot;H&#xe0;ng &#x111;i&#x1ec7;n m&#xe1;y&quot;, &quot;H&#xe0;ng gia d&#x1ee5;ng&quot; })" type="code"/>
+                  <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Hang thoi trang&quot;, &quot;H&#xe0;ng tieu dung&quot;, &quot;Hang dien may&quot;, &quot;Hang gia dung&quot; })" type="code"/>
                 </Property>
               </Properties>
               <Events>

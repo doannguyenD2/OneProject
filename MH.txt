@@ -1,24 +1,20 @@
-1000
-Tên hàng
-Hàng th?i trang
-Giá bán
-1000
-Tên hàng
-Hàng th?i trang
-Giá bán
 1001
 Tên hàng
-Hàng ?i?n máy
-Giá bán
+Hang thoi trang
+23
 1002
 Tên hàng
-Hàng ?i?n máy
-Giá bán
-1000
+Hang dien may
+23423
+1004
 Tên hàng
-Hàng th?i trang
-Giá bán
-1000
+Hang dien may
+2434
+1005
 Tên hàng
-Hàng gia d?ng
-Giá bán
+Hang dien may
+46345345
+1007
+Tên hàng
+Hang gia dung
+536

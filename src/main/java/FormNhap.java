@@ -1,9 +1,11 @@
 
+import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.*;
 import java.io.FileDescriptor;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +31,8 @@ public class FormNhap extends javax.swing.JFrame {
     
     public FormNhap() {
         initComponents();
+        readKhachHang();
+        readMaHang();
     }
 
     /**
@@ -188,7 +192,7 @@ public class FormNhap extends javax.swing.JFrame {
             }
         });
 
-        nhomHangCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hàng thời trang", "Hàng tiêu dùng", "Hàng điện máy", "Hàng gia dụng" }));
+        nhomHangCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hang thoi trang", "Hàng tieu dung", "Hang dien may", "Hang gia dung" }));
         nhomHangCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nhomHangComboActionPerformed(evt);
@@ -302,7 +306,8 @@ public class FormNhap extends javax.swing.JFrame {
             kH.setDiaChiString(diaChiTextField.getText());
             kH.setSoDTString(soDTTextField.getText());
             danhSachKH.add(kH);
-            maKhachHangLabel.setText("Mã khách hàng " + maKH+1);
+            maKH++;
+            maKhachHangLabel.setText("Mã khách hàng " + maKH);
             addRowKhachHang();
             
             //doc ghi file
@@ -321,7 +326,6 @@ public class FormNhap extends javax.swing.JFrame {
             bw.close();
             fw.close();
             //ket thuc doc ghi file
-            maKH++;
             tenKHTextField.setText("");
             diaChiTextField.setText("");
             soDTTextField.setText("");
@@ -338,14 +342,15 @@ public class FormNhap extends javax.swing.JFrame {
     private void themHangButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themHangButtonActionPerformed
         try {
             matHang mHang = new matHang();
-            mHang.setMaHang(maKH);
+            mHang.setMaHang(maMH);
             if(tenHangTextField.getText().isBlank()||nhomHangCombo.getSelectedItem().toString().isBlank()||giaBanTextField.getText().isBlank())
                 throw new IllegalArgumentException();
             mHang.setTenHangString(tenHangTextField.getText());
             mHang.setNhomHangString(nhomHangCombo.getSelectedItem().toString());
             mHang.setGiaDouble(Double.parseDouble(giaBanTextField.getText()));
             danhSachMH.add(mHang);
-            maHangLabel.setText("Mã hàng " + maKH+1);
+            maMH++;
+            maHangLabel.setText("Mã hàng " + maMH);
             addRowMatHang();
             
             //doc ghi file
@@ -360,11 +365,10 @@ public class FormNhap extends javax.swing.JFrame {
             bw.write(maMH + "\n");
             bw.write(tenHangLabel.getText() + "\n");
             bw.write(nhomHangCombo.getSelectedItem().toString() + "\n");
-            bw.write(giaBanLabel.getText() + "\n");
+            bw.write(giaBanTextField.getText() + "\n");
             bw.close();
             fw.close();
-            //ket thuc doc ghi file
-            maMH++;
+            //ket thuc doc ghi file 
             tenHangTextField.setText("");
             giaBanTextField.setText("");
             
@@ -401,7 +405,8 @@ public class FormNhap extends javax.swing.JFrame {
                 dtm1.addRow(rowKH);
        }
     }
-        private void addRowMatHang(){
+    
+    private void addRowMatHang(){
         DefaultTableModel dtm1 = (DefaultTableModel) hangHoaTable.getModel();
        dtm1.setRowCount(0);
        for(matHang s:danhSachMH){
@@ -412,6 +417,75 @@ public class FormNhap extends javax.swing.JFrame {
                 rowKH.add(s.getGiaDouble());
                 dtm1.addRow(rowKH);
        }
+    }
+    
+    private void readKhachHang(){
+        try {
+            File f = new File("KH.txt");
+            Scanner sc = new Scanner(f);
+            while(sc.hasNextLine())
+            {
+                khachHang kH = new khachHang();
+                kH.setMaKH(Integer.parseInt(sc.nextLine()));
+                kH.setHoTenString(sc.nextLine());
+                kH.setDiaChiString(sc.nextLine());
+                kH.setSoDTString(sc.nextLine());
+                danhSachKH.add(kH); 
+            }
+                addRowKhachHang();
+                
+                maKH = danhSachKH.get(danhSachKH.size()-1).getMaKH() + 1;
+                
+                sc.close();
+
+        } catch (FileNotFoundException e) {
+            loiLabel.setText("Khong ton tai file");
+            loiLabel.setForeground(Color.red);
+        } catch(NumberFormatException e)
+        {
+            loiLabel.setText("Loi doc file");
+            loiLabel.setForeground(Color.red);  
+        } catch(Exception e)
+        {
+            loiLabel.setText("Loi khong xac dinh");
+            loiLabel.setForeground(Color.red);  
+        }
+    }
+    
+    private void readMaHang() 
+    {
+        try {
+            File f = new File("MH.txt");
+            Scanner sc = new Scanner(f);
+            while(sc.hasNextLine())
+            {
+                matHang mH = new matHang();
+                mH.setMaHang(Integer.parseInt(sc.nextLine()));
+                mH.setTenHangString(sc.nextLine());
+                mH.setNhomHangString(sc.nextLine());
+                mH.setGiaDouble(Double.parseDouble(sc.nextLine()));
+                danhSachMH.add(mH);
+            }
+            addRowMatHang();
+            
+            if(danhSachKH.size()>0) maMH = danhSachMH.get(danhSachMH.size()-1).getMaHang()+ 1;
+            
+            sc.close();
+            
+            
+        } catch (FileNotFoundException e) {
+            loiHangLabel.setText("Khong ton tai file");
+            loiHangLabel.setForeground(Color.red);
+        } catch(NumberFormatException e)
+        {
+            loiHangLabel.setText("Loi doc file");
+            loiHangLabel.setForeground(Color.red);  
+        } catch(Exception e)
+        {
+            loiHangLabel.setText("Loi khong xac dinh");
+            loiHangLabel.setForeground(Color.red);  
+        }
+        
     }
     /**
      * @param args the command line arguments
