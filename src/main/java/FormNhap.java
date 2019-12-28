@@ -5,6 +5,7 @@ import java.io.*;
 import java.io.FileDescriptor;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Vector;
@@ -83,6 +84,8 @@ public class FormNhap extends javax.swing.JFrame {
         loiMuaBanLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         matHangComboBox = new javax.swing.JComboBox<>();
+        sortTenButton = new javax.swing.JButton();
+        sortSachButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,53 +134,53 @@ public class FormNhap extends javax.swing.JFrame {
             nhapKhachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nhapKhachLayout.createSequentialGroup()
                 .addGroup(nhapKhachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(nhapKhachLayout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(maKhachHangLabel)
-                        .addGap(90, 90, 90))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nhapKhachLayout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(themKhachButton)
+                        .addGap(72, 72, 72))
+                    .addGroup(nhapKhachLayout.createSequentialGroup()
                         .addGroup(nhapKhachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nhapKhachLayout.createSequentialGroup()
-                                .addComponent(themKhachButton)
-                                .addGap(59, 59, 59))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nhapKhachLayout.createSequentialGroup()
+                            .addGroup(nhapKhachLayout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(nhapKhachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(loiLabel)
+                                    .addComponent(maKhachHangLabel)
                                     .addGroup(nhapKhachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(diaChiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(soDTTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(nhapKhachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tenKHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2))))
-                                .addGap(18, 18, 18)))))
+                                        .addComponent(tenKHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(loiLabel)))
+                            .addGroup(nhapKhachLayout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(nhapKhachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))))
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         nhapKhachLayout.setVerticalGroup(
             nhapKhachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nhapKhachLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(28, 28, 28)
                 .addComponent(maKhachHangLabel)
-                .addGap(29, 29, 29)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tenKHTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(diaChiTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(soDTTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(themKhachButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(loiLabel)
-                .addGap(22, 22, 22)
-                .addComponent(themKhachButton)
-                .addContainerGap())
+                .addGap(85, 85, 85))
             .addGroup(nhapKhachLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -259,7 +262,7 @@ public class FormNhap extends javax.swing.JFrame {
                     .addGroup(nhapHangLayout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(themHangButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         nhapHangLayout.setVerticalGroup(
@@ -340,12 +343,26 @@ public class FormNhap extends javax.swing.JFrame {
             }
         });
 
+        sortTenButton.setText("Sort theo ten");
+        sortTenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortTenButtonActionPerformed(evt);
+            }
+        });
+
+        sortSachButton.setText("Sort theo sach");
+        sortSachButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortSachButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(tenMHMBComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -355,14 +372,19 @@ public class FormNhap extends javax.swing.JFrame {
                     .addComponent(addMBButton)
                     .addComponent(loiMuaBanLabel)
                     .addComponent(jLabel1)
-                    .addComponent(matHangComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                    .addComponent(matHangComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sortTenButton)
+                    .addComponent(sortSachButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(105, 105, 105)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
                 .addComponent(tenKHMBLabel)
                 .addGap(18, 18, 18)
                 .addComponent(tenKHMBComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,14 +396,15 @@ public class FormNhap extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(matHangComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(loiMuaBanLabel)
                 .addGap(18, 18, 18)
+                .addComponent(loiMuaBanLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addMBButton)
-                .addGap(40, 40, 40))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(sortTenButton)
+                .addGap(18, 18, 18)
+                .addComponent(sortSachButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabNhapKhach.addTab("danh sach mua hang", jPanel1);
@@ -566,6 +589,20 @@ public class FormNhap extends javax.swing.JFrame {
     private void matHangComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matHangComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_matHangComboBoxActionPerformed
+
+    private void sortTenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortTenButtonActionPerformed
+        // TODO add your handling code here:
+        //sort https://howtodoinjava.com/sort/collections-sort/
+        Collections.sort(danhSachMuaHang, (a,b)->a.getKhHang().getHoTenString().compareTo(b.getKhHang().getHoTenString()));
+        addRowMuaBan();
+    }//GEN-LAST:event_sortTenButtonActionPerformed
+
+    private void sortSachButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortSachButtonActionPerformed
+        // TODO add your handling code here:
+        //sort https://howtodoinjava.com/sort/collections-sort/
+        Collections.sort(danhSachMuaHang, (a,b)->a.getMatHang().getTenHangString().compareTo(b.getMatHang().getTenHangString()));
+        addRowMuaBan();
+    }//GEN-LAST:event_sortSachButtonActionPerformed
 
     private void addRowKhachHang(){
         DefaultTableModel dtm1 = (DefaultTableModel) khachHangTable.getModel();
@@ -773,6 +810,8 @@ public class FormNhap extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> nhomHangCombo;
     private javax.swing.JLabel nhomHangLabel;
     private javax.swing.JTextField soDTTextField;
+    private javax.swing.JButton sortSachButton;
+    private javax.swing.JButton sortTenButton;
     private javax.swing.JTabbedPane tabNhapKhach;
     private javax.swing.JLabel tenHangLabel;
     private javax.swing.JTextField tenHangTextField;
