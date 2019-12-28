@@ -1,20 +1,20 @@
 1001
-Tên hàng
+Hang 1
 Hang thoi trang
 23
 1002
-Tên hàng
+Hang 2
 Hang dien may
 23423
 1004
-Tên hàng
+Hang 3
 Hang dien may
 2434
 1005
-Tên hàng
+Hang 4
 Hang dien may
 46345345
 1007
-Tên hàng
+Hang 5
 Hang gia dung
 536
