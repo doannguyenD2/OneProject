@@ -46,9 +46,9 @@ public class quanLy {
         this.soLuong = soLuong;
     }
     
-    public void add()
+    public void add(int k)
     {
-        soLuong++;
+        soLuong += k;
     }
     
 }
