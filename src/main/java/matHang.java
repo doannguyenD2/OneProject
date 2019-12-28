@@ -46,6 +46,11 @@ public class matHang {
         this.nhomHangString = nhomHangString;
     }
     
+    public Object toObject(){
+        return new Object[]{
+            maHang,tenHangString,nhomHangString,giaDouble
+        };
+    }
     
        
 }

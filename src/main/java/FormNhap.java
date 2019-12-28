@@ -608,12 +608,7 @@ public class FormNhap extends javax.swing.JFrame {
         DefaultTableModel dtm1 = (DefaultTableModel) khachHangTable.getModel();
        dtm1.setRowCount(0);
        for(khachHang s:danhSachKH){
-                Vector rowKH= new Vector();
-                rowKH.add(s.getMaKH());
-                rowKH.add(s.getHoTenString());
-                rowKH.add(s.getDiaChiString());
-                rowKH.add(s.getSoDTLong());
-                dtm1.addRow(rowKH);
+                dtm1.addRow((Object[]) s.toObject());
        }
     }
     
@@ -621,12 +616,8 @@ public class FormNhap extends javax.swing.JFrame {
         DefaultTableModel dtm1 = (DefaultTableModel) hangHoaTable.getModel();
        dtm1.setRowCount(0);
        for(matHang s:danhSachMH){
-                Vector rowKH= new Vector();
-                rowKH.add(s.getMaHang());
-                rowKH.add(s.getTenHangString());
-                rowKH.add(s.getNhomHangString());
-                rowKH.add(s.getGiaDouble());
-                dtm1.addRow(rowKH);
+           //https://stackoverflow.com/questions/3549206/how-to-add-row-in-jtable
+                dtm1.addRow((Object[]) s.toObject());
        }
     }
     
@@ -634,13 +625,7 @@ public class FormNhap extends javax.swing.JFrame {
         DefaultTableModel dtm1 = (DefaultTableModel) muaBanTable.getModel();
        dtm1.setRowCount(0);
        for(quanLy s:danhSachMuaHang){
-                Vector rowKH= new Vector();
-                rowKH.add(s.getKhHang().getMaKH());
-                rowKH.add(s.getKhHang().getHoTenString());
-                rowKH.add(s.getMatHang().getMaHang());
-                rowKH.add(s.getMatHang().getTenHangString());
-                rowKH.add(s.getSoLuong());
-                dtm1.addRow(rowKH);
+                dtm1.addRow((Object[]) s.toObject());
        }
     }
     

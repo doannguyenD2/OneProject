@@ -51,4 +51,10 @@ public class quanLy {
         soLuong += k;
     }
     
+    public Object toObject(){
+        return new Object[]{
+            khHang.getMaKH(), khHang.getHoTenString(), matHang.getMaHang(), matHang.getTenHangString(), soLuong
+        };
+    }
+    
 }

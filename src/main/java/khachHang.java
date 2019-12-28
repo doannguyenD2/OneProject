@@ -1,3 +1,6 @@
+
+import java.util.Vector;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -44,6 +47,12 @@ public class khachHang {
 
     public void setSoDTLong(long soDTLong) {
         this.soDTLong = soDTLong;
+    }
+    
+    public Object toObject(){
+        return new Object[]{
+          maKH,hoTenString,diaChiString,soDTLong  
+        };
     }
 
     
