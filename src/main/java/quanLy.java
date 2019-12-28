@@ -9,41 +9,46 @@
  * @author dharm
  */
 public class quanLy {
-    private int maHangQL;
-    private String tenHangQL;
-    private int maKhachQL;
-    private  String tenKhachQL;
+    private khachHang khHang;
+    private matHang matHang;
+    private int soLuong;
 
-    public int getMaHangQL() {
-        return maHangQL;
+    public quanLy() {
     }
 
-    public int getMaKhachQL() {
-        return maKhachQL;
+    public quanLy(khachHang khHang, matHang matHang, int soLuong) {
+        this.khHang = khHang;
+        this.matHang = matHang;
+        this.soLuong = soLuong;
     }
 
-    public String getTenHangQL() {
-        return tenHangQL;
+    public khachHang getKhHang() {
+        return khHang;
     }
 
-    public String getTenKhachQL() {
-        return tenKhachQL;
+    public matHang getMatHang() {
+        return matHang;
     }
 
-    public void setMaHangQL(int maHangQL) {
-        this.maHangQL = maHangQL;
+    public int getSoLuong() {
+        return soLuong;
     }
 
-    public void setMaKhachQL(int maKhachQL) {
-        this.maKhachQL = maKhachQL;
+    public void setKhHang(khachHang khHang) {
+        this.khHang = khHang;
     }
 
-    public void setTenHangQL(String tenHangQL) {
-        this.tenHangQL = tenHangQL;
+    public void setMatHang(matHang matHang) {
+        this.matHang = matHang;
     }
 
-    public void setTenKhachQL(String tenKhachQL) {
-        this.tenKhachQL = tenKhachQL;
-    } 
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+    
+    public void add()
+    {
+        soLuong++;
+    }
     
 }

@@ -26,7 +26,7 @@ public class FormNhap extends javax.swing.JFrame {
 
     private  ArrayList<khachHang> danhSachKH = new ArrayList<>();
     private  ArrayList<matHang> danhSachMH = new ArrayList<>();
-    private  ArrayList<Pair<Pair<Integer>>> danhSachMuaHang = new ArrayList<>();
+    private  ArrayList<quanLy> danhSachMuaHang = new ArrayList<>();
     private int maKH=10000; 
     private int maMH = 1000;
     
@@ -80,6 +80,7 @@ public class FormNhap extends javax.swing.JFrame {
         tenKHMBLabel = new javax.swing.JLabel();
         maMHMBLabel = new javax.swing.JLabel();
         addMBButton = new javax.swing.JButton();
+        loiMuaBanLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -302,11 +303,11 @@ public class FormNhap extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Ma KH", "Ma Hang", "So luong"
+                "Ma KH", "Ten KH", "Ma Hang", "Ten MH", "So luong"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -326,6 +327,8 @@ public class FormNhap extends javax.swing.JFrame {
             }
         });
 
+        loiMuaBanLabel.setText("Label báo lỗi");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -338,7 +341,8 @@ public class FormNhap extends javax.swing.JFrame {
                         .addComponent(tenKHMBComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tenKHMBLabel)
                     .addComponent(maMHMBLabel)
-                    .addComponent(addMBButton))
+                    .addComponent(addMBButton)
+                    .addComponent(loiMuaBanLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -354,6 +358,8 @@ public class FormNhap extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(tenMHMBComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(loiMuaBanLabel)
+                .addGap(18, 18, 18)
                 .addComponent(addMBButton)
                 .addGap(40, 40, 40))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -489,26 +495,52 @@ public class FormNhap extends javax.swing.JFrame {
 
     private void addMBButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMBButtonActionPerformed
         // TODO add your handling code here:
-        int checkIfExist = 0;
-        Pair<Integer> p = new Pair();
-        //get data from JcomboBox
-        p.setFirst(Integer.parseInt(tenKHMBComboBox.getSelectedItem().toString()));
-        p.setSecond(Integer.parseInt(tenMHMBComboBox.getSelectedItem().toString()));
-        for(Pair<Pair<Integer>> T:danhSachMuaHang){
-            if(T.getFirst().getSecond()==p.getSecond()&&Integer.parseInt(T.getFirst().getFirst().toString())==p.getFirst()) {
-                checkIfExist++;
-                T.add();
+        int checkMH = Integer.parseInt(tenMHMBComboBox.getSelectedItem().toString());
+        int checkKH = Integer.parseInt(tenKHMBComboBox.getSelectedItem().toString());
+        
+        quanLy qL = new quanLy();
+        
+        for( khachHang s:danhSachKH)
+        {
+            if(s.getMaKH() == checkKH)
+            {
+                qL.setKhHang(s);
                 break;
             }
-        };
+        }
+        
+        for(matHang s:danhSachMH)
+        {
+            if(s.getMaHang() == checkMH)
+            {
+                qL.setMatHang(s);
+                break;
+            }
+        }
+        int checkIfExist = 0;
+        for(quanLy s:danhSachMuaHang)
+        {
+            if(s.getKhHang()==qL.getKhHang()&&s.getMatHang()==qL.getMatHang())
+            {
+                if(s.getSoLuong()>=10)
+                {
+                    loiMuaBanLabel.setText("Vuot qua so luong quy dinh");
+                    checkIfExist = 1;
+                    break;
+                }
+                    
+                s.add();
+                checkIfExist = 1;
+                break;
+            }
+        }
+        
         if(checkIfExist==0)
         {
-            Pair<Pair<Integer>> p1 = new Pair();
-            p1.setFirst(p);
-            p1.setSecond(1);
-            danhSachMuaHang.add(p1);
+            qL.setSoLuong(1);
+            danhSachMuaHang.add(qL);
         }
-       addRowMuaBan();
+        addRowMuaBan();
         
     }//GEN-LAST:event_addMBButtonActionPerformed
 
@@ -541,11 +573,13 @@ public class FormNhap extends javax.swing.JFrame {
     private void addRowMuaBan(){
         DefaultTableModel dtm1 = (DefaultTableModel) muaBanTable.getModel();
        dtm1.setRowCount(0);
-       for(Pair<Pair<Integer>> s:danhSachMuaHang){
+       for(quanLy s:danhSachMuaHang){
                 Vector rowKH= new Vector();
-                rowKH.add(s.getFirst().getFirst());
-                rowKH.add(s.getFirst().getSecond());
-                rowKH.add(s.getSecond());
+                rowKH.add(s.getKhHang().getMaKH());
+                rowKH.add(s.getKhHang().getHoTenString());
+                rowKH.add(s.getMatHang().getMaHang());
+                rowKH.add(s.getMatHang().getTenHangString());
+                rowKH.add(s.getSoLuong());
                 dtm1.addRow(rowKH);
        }
     }
@@ -680,6 +714,7 @@ public class FormNhap extends javax.swing.JFrame {
     private javax.swing.JTable khachHangTable;
     private javax.swing.JLabel loiHangLabel;
     private javax.swing.JLabel loiLabel;
+    private javax.swing.JLabel loiMuaBanLabel;
     private javax.swing.JLabel maHangLabel;
     private javax.swing.JLabel maKhachHangLabel;
     private javax.swing.JLabel maMHMBLabel;
