@@ -463,6 +463,7 @@ public class FormNhap extends javax.swing.JFrame {
             //ket thuc doc ghi file
             tenHangTextField.setText("");
             giaBanTextField.setText("");
+            loiLabel.setText("");
 
         } catch(NumberFormatException ex)
         {
@@ -482,7 +483,7 @@ public class FormNhap extends javax.swing.JFrame {
         try {
             khachHang kH = new khachHang();
             kH.setMaKH(maKH);
-            if(tenKHTextField.getText().isBlank()||diaChiTextField.getText().isBlank()||soDTTextField.getText().isBlank())
+            if(tenKHTextField.getText().trim().isEmpty()||diaChiTextField.getText().trim().isEmpty()||soDTTextField.getText().trim().isEmpty())
             throw new IllegalArgumentException();
             kH.setHoTenString(tenKHTextField.getText());
             kH.setDiaChiString(diaChiTextField.getText());
