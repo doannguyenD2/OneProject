@@ -81,6 +81,8 @@ public class FormNhap extends javax.swing.JFrame {
         maMHMBLabel = new javax.swing.JLabel();
         addMBButton = new javax.swing.JButton();
         loiMuaBanLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        matHangComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -257,7 +259,7 @@ public class FormNhap extends javax.swing.JFrame {
                     .addGroup(nhapHangLayout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(themHangButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         nhapHangLayout.setVerticalGroup(
@@ -329,6 +331,15 @@ public class FormNhap extends javax.swing.JFrame {
 
         loiMuaBanLabel.setText("Label báo lỗi");
 
+        jLabel1.setText("Số lượng <10");
+
+        matHangComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1","2","3","4","5","6","7","8","9","10" }));
+        matHangComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                matHangComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -342,8 +353,10 @@ public class FormNhap extends javax.swing.JFrame {
                     .addComponent(tenKHMBLabel)
                     .addComponent(maMHMBLabel)
                     .addComponent(addMBButton)
-                    .addComponent(loiMuaBanLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                    .addComponent(loiMuaBanLabel)
+                    .addComponent(jLabel1)
+                    .addComponent(matHangComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -353,10 +366,14 @@ public class FormNhap extends javax.swing.JFrame {
                 .addComponent(tenKHMBLabel)
                 .addGap(18, 18, 18)
                 .addComponent(tenKHMBComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addGap(18, 18, 18)
                 .addComponent(maMHMBLabel)
                 .addGap(18, 18, 18)
                 .addComponent(tenMHMBComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(matHangComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(loiMuaBanLabel)
                 .addGap(18, 18, 18)
@@ -497,6 +514,7 @@ public class FormNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         int checkMH = Integer.parseInt(tenMHMBComboBox.getSelectedItem().toString());
         int checkKH = Integer.parseInt(tenKHMBComboBox.getSelectedItem().toString());
+        int soLuongMH = Integer.parseInt(matHangComboBox.getSelectedItem().toString());
         
         quanLy qL = new quanLy();
         
@@ -522,14 +540,14 @@ public class FormNhap extends javax.swing.JFrame {
         {
             if(s.getKhHang()==qL.getKhHang()&&s.getMatHang()==qL.getMatHang())
             {
-                if(s.getSoLuong()>=10)
+                if(s.getSoLuong()+ soLuongMH > 10)
                 {
                     loiMuaBanLabel.setText("Vuot qua so luong quy dinh");
                     checkIfExist = 1;
                     break;
                 }
                     
-                s.add();
+                s.add(soLuongMH);
                 checkIfExist = 1;
                 break;
             }
@@ -537,12 +555,17 @@ public class FormNhap extends javax.swing.JFrame {
         
         if(checkIfExist==0)
         {
-            qL.setSoLuong(1);
+            qL.setSoLuong(soLuongMH);
             danhSachMuaHang.add(qL);
         }
         addRowMuaBan();
+        writeMuaBan();
         
     }//GEN-LAST:event_addMBButtonActionPerformed
+
+    private void matHangComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matHangComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_matHangComboBoxActionPerformed
 
     private void addRowKhachHang(){
         DefaultTableModel dtm1 = (DefaultTableModel) khachHangTable.getModel();
@@ -663,6 +686,30 @@ public class FormNhap extends javax.swing.JFrame {
             tenMHMBComboBox.addItem(String.valueOf(mH.getMaHang()));
         });
     }
+    
+    private void writeMuaBan()
+    {
+        try {
+            File file = new File("QLBH.txt");
+            if(!file.exists()) file.createNewFile();
+
+            FileWriter fw;
+
+            fw = new FileWriter(file.getAbsoluteFile(),false);
+            //https://www.quora.com/How-do-I-clear-a-file-in-Java-before-writing-to-it-again
+            for(quanLy s:danhSachMuaHang)
+            {
+                fw.write(s.getKhHang().getHoTenString() + "\n");
+                fw.write(s.getMatHang().getTenHangString() + "\n");
+                fw.write(s.getSoLuong() + "\n");
+            }
+            fw.close();
+            //ket thuc doc ghi file 
+        } catch (Exception e) {
+            loiMuaBanLabel.setText("Loi ra vao file");
+        }
+            
+    }
     /**
      * @param args the command line arguments
      */
@@ -704,6 +751,7 @@ public class FormNhap extends javax.swing.JFrame {
     private javax.swing.JLabel giaBanLabel;
     private javax.swing.JTextField giaBanTextField;
     private javax.swing.JTable hangHoaTable;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -718,6 +766,7 @@ public class FormNhap extends javax.swing.JFrame {
     private javax.swing.JLabel maHangLabel;
     private javax.swing.JLabel maKhachHangLabel;
     private javax.swing.JLabel maMHMBLabel;
+    private javax.swing.JComboBox<String> matHangComboBox;
     private javax.swing.JTable muaBanTable;
     private javax.swing.JPanel nhapHang;
     private javax.swing.JPanel nhapKhach;
