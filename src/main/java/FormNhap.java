@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -30,7 +31,6 @@ public class FormNhap extends javax.swing.JFrame {
     private  ArrayList<quanLy> danhSachMuaHang = new ArrayList<>();
     private int maKH=10000; 
     private int maMH = 1000;
-    
     
     public FormNhap() {
         initComponents();
@@ -435,11 +435,13 @@ public class FormNhap extends javax.swing.JFrame {
         try {
             matHang mHang = new matHang();
             mHang.setMaHang(maMH);
-            if(tenHangTextField.getText().isBlank()||nhomHangCombo.getSelectedItem().toString().isBlank()||giaBanTextField.getText().isBlank())
-            throw new IllegalArgumentException();
-            mHang.setTenHangString(tenHangTextField.getText());
-            mHang.setNhomHangString(nhomHangCombo.getSelectedItem().toString());
-            mHang.setGiaDouble(Double.parseDouble(giaBanTextField.getText()));
+            String tenHang = tenHangTextField.getText();
+            String nhomHang = nhomHangCombo.getSelectedItem().toString();
+            String giaBan = giaBanTextField.getText();
+            if(tenHang.trim().isEmpty()||nhomHang.trim().isEmpty()||giaBan.trim().isEmpty()) throw new IllegalArgumentException();
+            mHang.setTenHangString(tenHang);
+            mHang.setNhomHangString(nhomHang);
+            mHang.setGiaDouble(Double.parseDouble(giaBan));
             danhSachMH.add(mHang);
             maMH++;
             maHangLabel.setText("Mã hàng " + maMH);
@@ -455,9 +457,9 @@ public class FormNhap extends javax.swing.JFrame {
             fw = new FileWriter(file.getAbsoluteFile(),true);
             bw = new BufferedWriter(fw);
             bw.write(maMH + "\n");
-            bw.write(tenHangTextField.getText() + "\n");
-            bw.write(nhomHangCombo.getSelectedItem().toString() + "\n");
-            bw.write(giaBanTextField.getText() + "\n");
+            bw.write(tenHang + "\n");
+            bw.write(nhomHang + "\n");
+            bw.write(giaBan + "\n");
             bw.close();
             fw.close();
             //ket thuc doc ghi file
@@ -468,13 +470,12 @@ public class FormNhap extends javax.swing.JFrame {
         } catch(NumberFormatException ex)
         {
             // phai try catch cai cu the truoc
-            loiHangLabel.setText("Loi dinh dang gia");
+            JOptionPane.showMessageDialog(rootPane, "Loi dinh dang gia");
         }
         catch (IllegalArgumentException e) {
-            loiHangLabel.setText("Vui long dien vao ki tu trong");
+            JOptionPane.showMessageDialog(rootPane, "Vui long dien vao cho trong");
         } catch (IOException ex) {
-            Logger.getLogger(FormNhap.class.getName()).log(Level.SEVERE, null, ex);
-            loiHangLabel.setText("Loi ra vao file, vui long xoa file va thu lai");
+            JOptionPane.showMessageDialog(rootPane, "Loi ra vao file");
         }
     }//GEN-LAST:event_themHangButtonActionPerformed
 
@@ -483,11 +484,14 @@ public class FormNhap extends javax.swing.JFrame {
         try {
             khachHang kH = new khachHang();
             kH.setMaKH(maKH);
-            if(tenKHTextField.getText().trim().isEmpty()||diaChiTextField.getText().trim().isEmpty()||soDTTextField.getText().trim().isEmpty())
+            String tenKH = tenHangTextField.getText();
+            String diaChi = diaChiTextField.getText();
+            String soDT = soDTTextField.getText();
+            if(tenKH.trim().isEmpty()||diaChi.trim().isEmpty()||soDT.trim().isEmpty())
             throw new IllegalArgumentException();
-            kH.setHoTenString(tenKHTextField.getText());
-            kH.setDiaChiString(diaChiTextField.getText());
-            kH.setSoDTLong(Long.parseLong(soDTTextField.getText()));
+            kH.setHoTenString(tenKH);
+            kH.setDiaChiString(diaChi);
+            kH.setSoDTLong(Long.parseLong(soDT));
             danhSachKH.add(kH);
             maKH++;
             maKhachHangLabel.setText("Mã khách hàng " + maKH);
@@ -503,9 +507,9 @@ public class FormNhap extends javax.swing.JFrame {
             fw = new FileWriter(file.getAbsoluteFile(),true);
             bw = new BufferedWriter(fw);
             bw.write(maKH + "\n");
-            bw.write(tenKHTextField.getText() + "\n");
-            bw.write(diaChiTextField.getText() + "\n");
-            bw.write(soDTTextField.getText() + "\n");
+            bw.write(tenKH + "\n");
+            bw.write(diaChi + "\n");
+            bw.write(soDT + "\n");
             bw.close();
             fw.close();
             //ket thuc doc ghi file
@@ -515,13 +519,12 @@ public class FormNhap extends javax.swing.JFrame {
 
         } catch(NumberFormatException e)
         {
-            loiLabel.setText("Sai SDT");
+            JOptionPane.showMessageDialog(rootPane, "So dien thoai ko dung");
         }
         catch (IllegalArgumentException e) {
-            loiLabel.setText("Vui long dien vao ki tu trong");
+            JOptionPane.showMessageDialog(rootPane, "Vui long dien vao cho trong");
         } catch (IOException ex) {
-            Logger.getLogger(FormNhap.class.getName()).log(Level.SEVERE, null, ex);
-            loiLabel.setText("Loi ra vao file, vui long xoa file va thu lai");
+            JOptionPane.showMessageDialog(rootPane, "Loi ra vao file");
         }
 
     }//GEN-LAST:event_themKhachButtonActionPerformed
@@ -566,7 +569,7 @@ public class FormNhap extends javax.swing.JFrame {
             {
                 if(s.getSoLuong()+ soLuongMH > 10)
                 {
-                    loiMuaBanLabel.setText("Vuot qua so luong quy dinh");
+                    JOptionPane.showMessageDialog(rootPane, "Qua so kuong quy dinh, >10");
                     checkIfExist = 1;
                     break;
                 }
@@ -596,6 +599,7 @@ public class FormNhap extends javax.swing.JFrame {
         //sort https://howtodoinjava.com/sort/collections-sort/
         Collections.sort(danhSachMuaHang, (a,b)->a.getKhHang().getHoTenString().compareTo(b.getKhHang().getHoTenString()));
         addRowMuaBan();
+        writeMuaBan();
     }//GEN-LAST:event_sortTenButtonActionPerformed
 
     private void sortSachButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortSachButtonActionPerformed
@@ -603,6 +607,7 @@ public class FormNhap extends javax.swing.JFrame {
         //sort https://howtodoinjava.com/sort/collections-sort/
         Collections.sort(danhSachMuaHang, (a,b)->a.getMatHang().getTenHangString().compareTo(b.getMatHang().getTenHangString()));
         addRowMuaBan();
+        writeMuaBan();
     }//GEN-LAST:event_sortSachButtonActionPerformed
 
     private void addRowKhachHang(){
@@ -645,21 +650,20 @@ public class FormNhap extends javax.swing.JFrame {
             }
                 addRowKhachHang();
                 
+                
+                if(danhSachKH.size()>0)
                 maKH = danhSachKH.get(danhSachKH.size()-1).getMaKH() + 1;
                 
                 sc.close();
 
         } catch (FileNotFoundException e) {
-            loiLabel.setText("Khong ton tai file");
-            loiLabel.setForeground(Color.red);
+            JOptionPane.showMessageDialog(rootPane, "Khong ton tai file");
         } catch(NumberFormatException e)
         {
-            loiLabel.setText("Loi doc file");
-            loiLabel.setForeground(Color.red);  
+            JOptionPane.showMessageDialog(rootPane, "Loi ra vao file");
         } catch(Exception e)
         {
-            loiLabel.setText("Loi khong xac dinh");
-            loiLabel.setForeground(Color.red);  
+           JOptionPane.showMessageDialog(rootPane, "Loi khong xac dinh");
         }
     }
     
@@ -685,16 +689,13 @@ public class FormNhap extends javax.swing.JFrame {
             
             
         } catch (FileNotFoundException e) {
-            loiHangLabel.setText("Khong ton tai file");
-            loiHangLabel.setForeground(Color.red);
+            JOptionPane.showMessageDialog(rootPane, "Khong ton tai file Hang");
         } catch(NumberFormatException e)
         {
-            loiHangLabel.setText("Loi doc file");
-            loiHangLabel.setForeground(Color.red);  
+            JOptionPane.showMessageDialog(rootPane,"Loi dinh dang file Hang hoa");
         } catch(Exception e)
         {
-            loiHangLabel.setText("Loi khong xac dinh");
-            loiHangLabel.setForeground(Color.red);  
+            JOptionPane.showMessageDialog(rootPane, "Loi hang hoa khong xac dinh");
         }
         
     }
@@ -729,7 +730,7 @@ public class FormNhap extends javax.swing.JFrame {
             fw.close();
             //ket thuc doc ghi file 
         } catch (Exception e) {
-            loiMuaBanLabel.setText("Loi ra vao file");
+            JOptionPane.showMessageDialog(rootPane, "Loi ra vao file mua ban");
         }
             
     }
